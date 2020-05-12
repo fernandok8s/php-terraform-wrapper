@@ -1,4 +1,16 @@
-{
+{  
+    "name": "tf/php-terraform-wrapper",
+    "description": "php wrapper for basic terraform commands",
+    "keywords": ["php", "terraform"],
+    "homepage": "https://github.com/fernandokbs/php-terraform-wrapper",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Fernando Garcia",
+        "email": "fernando93d@gmail.com"
+      }
+    ],
     "require": {
         "symfony/process": "^5.0"
     },
