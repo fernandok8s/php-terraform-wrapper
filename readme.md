@@ -37,10 +37,20 @@ $terraform->apply()
 ```
 
 ```php
+
 $tf->destroy()
     ->autoApprove()
     ->execute();
 
 // cd plan_path && terraform destroy -auto-approve
+
+```
+
+```php
+
+$output = "";
+
+$output = $tf->output("ip")
+    ->execute(null);
 
 ```

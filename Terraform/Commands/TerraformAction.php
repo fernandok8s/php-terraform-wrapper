@@ -5,11 +5,15 @@ use Symfony\Component\Process\Process;
 
 class TerraformAction extends AbstractTerraformCommand implements TerraformActionInterface
 {
-    private $supportedActions = ["init","apply","destroy"];
+    private $supportedActions = ["init","apply","destroy","output"];
 
-    public function action(string $action): TerraformActionInterface 
+    public function action(string $action, string $argument = null): TerraformActionInterface 
     {
         $this->addCommand($action);
+        
+        if(!is_null($argument))
+            $this->addOption($argument);
+
         return $this;
     }
 
@@ -31,7 +35,7 @@ class TerraformAction extends AbstractTerraformCommand implements TerraformActio
         return $this;
     }
     
-    public function execute($callback = null): int
+    public function execute($callback = null)
     {
         return $this->runProcess($callback);
     }
@@ -45,7 +49,7 @@ class TerraformAction extends AbstractTerraformCommand implements TerraformActio
     {
         if(in_array($funName, $this->supportedActions)) 
         {
-            $this->action($funName);
+            $this->action($funName, current($arguments));
             return $this;
         }
     }

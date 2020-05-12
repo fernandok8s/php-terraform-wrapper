@@ -31,6 +31,6 @@ final class Terraform
 
     public function __call($funName, $arguments) 
     {
-        return call_user_func([new TerraformAction($this->createProccess($this->plan)), $funName]);
+        return call_user_func_array([new TerraformAction($this->createProccess($this->plan)), $funName],  $arguments);
     }
 }

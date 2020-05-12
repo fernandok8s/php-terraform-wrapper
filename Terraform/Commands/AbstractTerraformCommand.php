@@ -36,6 +36,11 @@ abstract class AbstractTerraformCommand
             $this->vars = array_merge($this->vars, $vars);   
     }
 
+    public function addOption(string $argument): void
+    {
+        array_push($this->options, $argument);
+    }
+
     public function addExtraOptions(array $options): void 
     {
         if(empty($this->options))
@@ -72,6 +77,15 @@ abstract class AbstractTerraformCommand
             )
             ->getProcess();
         
-        return $process->run($callback);
+        $result = $process->run($callback);
+
+        if(is_null($callback)) {
+            $result = $process->getOutput();
+
+            if ($process->isSuccessful() === false)
+                $process->getErrorOutput();
+        }
+
+        return $result;
     }
 }
